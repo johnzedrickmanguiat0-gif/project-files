@@ -1,6 +1,6 @@
 <x-app-layout>
-    <x-slot name="header">{{__('Manage Customer') }}</x-slot>
-    <x-slot name="subHeader">{{__('You can manage your customer and register new customer here.') }}</x-slot>
+    <x-slot name="header">{{ __('Customer Information') }}</x-slot>
+    <x-slot name="subHeader">{{ __('You can manage your customer and register new customer here.') }}</x-slot>
 
     <div class="nk-block">
         <div class="row g-gs">
@@ -11,8 +11,8 @@
                             <button class="btn btn-primary btn-round" data-bs-toggle="modal" data-bs-target="#registration">
                                 <em class="icon ni ni-plus-circle"></em>&ensp;
                                 Register New Customer
-                            </button>  
-                        </span>      
+                            </button>
+                        </span>
                         <table class="datatable-init table table-hover">
                             <thead>
                                 <tr>
@@ -25,7 +25,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($customers as $data)
+                              @foreach ($customers as $data)
                                 <tr style="cursor: pointer">
                                     <td>1.</td>
                                     <td>{{ $data->cus_last_name }}, {{ $data->cus_first_name }}</td>
@@ -41,13 +41,13 @@
                                 @endforeach
                             </tbody>
                         </table>    
-
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" tabindex="1" role="dialog" id="registration">
+
+   <div class="modal fade" tabindex="-1" role="dialog" id="registration">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <a href="#" class="close" data-bs-dismiss="modal">
@@ -55,66 +55,207 @@
                 </a>
                 <div class="modal-body">
                     <h1 class="nk-block-title page-title">
-                        Register New Customer
+                        Personal Information
                     </h1>
+                    <p>You can create new customer to monitor.</p>
                     <hr class="mt-2 mb-2">
-                    {{-- --}}     
-                <form action="{{ route('customer.save') }}" method="POST">
+                    
+                    <form action="" autocomplete="off">
+                        @csrf
 
-                    @csrf
-                    <!-- First Name -->
-                    <div class="row mt-2 align-center">
-                        <div class="col-lg-5">
-                            <div class="form-group">
-                                <label class="form-label" for="inp_fn">First Name <b
-                                class="text-danger">*</b></label>
-                            <span class="form-note">Specify the First Name here. </span>
-                        </div>
-                    </div>            
-                    <div class="col-lg-7">
-                        <div class="form-control-wrap">
-                            <div class="form-icon form-icon-right">
-                                <em class="icon ni ni-info"></em>
+                        <!-- First Name -->
+                         <div class="row mt-2 align-center">
+                            <div class="col-lg-4">
+
+                                <div class="form-group">
+                                    <label class="form-label" for="inp_fn">First Name <b
+                                            class="text-danger">*</b></label>
+                                    <span class="form-note">Specify the First Name here.</span>
+                                </div>
                             </div>
-                            <input type="text" class="form-control" id="inp_fn" name="inp_fn"
-                                placeholder="Enter First Name here..." required>   
-                    </div>
-                </div>    
-            </div>
-            <!-- Last Name -->
-                    <div class="row mt-2 align-center">
-                        <div class="col-lg-5">
-                            <div class="form-group">
-                                <label class="form-label" for="inp_ln">Last Name <b
-                                class="text-danger">*</b></label>
-                            <span class="form-note">Specify the Last Name here. </span>
-                        </div>
-                    </div>            
-                    <div class="col-lg-7">
-                        <div class="form-control-wrap">
-                            <div class="form-icon form-icon-right">
-                                <em class="icon ni ni-info"></em>
+                            <div class="col-lg-8">
+                                <div class="form-control-wrap">
+                                    <div class="form-icon form-icon-right">
+                                        <em class="icon ni ni-info"></em>
+                                    </div>
+                                    <input type="text" required class="form-control" id="inp_fn" name="inp_fn"
+                                        placeholder="Enter (Required) First Name here..." required>
+                                </div>
                             </div>
-                            <input type="text" class="form-control" id="inp_ln" name="inp_ln"
-                                placeholder="Enter Last Name here..." required>   
-                    </div>
-                </div>    
-            </div>
-           
-            <!-- Submit Button -->
-                    <div class="row mt-4">
-                        <div class="col-lg-5"></div>
-                        <div class="col-lg-7">    
-                            <button type="submit" class="btn btn-primary btn-block">
-                                <em class="icon ni ni-save"></em>&nbsp;
-                                Submit New Customer
-                            </button>
-                               
                         </div>
-                    </div> 
-                </Form>   
+
+                        <!-- Last Name -->
+                         <div class="row mt-2 align-center">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="inp_ln">Last Name <b
+                                            class="text-danger">*</b></label>
+                                    <span class="form-note">Specify the Last Name here.</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="form-control-wrap">
+                                    <div class="form-icon form-icon-right">
+                                        <em class="icon ni ni-info"></em>
+                                    </div>
+                                    <input type="text" required class="form-control" id="inp_ln" name="inp_ln"
+                                        placeholder="Enter (Required) Last Name here..." required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gender -->
+                         <div class="row mt-2 align-center">
+                            <div class="col-lg-4">
+
+                                <div class="form-group">
+                                    <label class="form-label" for="inp_gender">Gender<b
+                                            class="text-danger">*</b></label>
+                                    <span class="form-note">Specify the Gender here.</span>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-8">
+
+                                <select class="form-select" required>
+                                    <option value="" data-select2-id="3" style="text-transform: uppercase !important;">- SELECT GENDER -</option>
+                                        <option value="Male" data-select2-id="16">Male</option>
+                                    <option value="Female" data-select2-id="16">Female</option>
+                            </select>
+			            </div>
+			        </div>
+
+
+                        <!-- Region --> 
+                        <div class="row mt-2 align-center">
+                            <div class="col-lg-4">
+
+                                <div class="form-group">
+                                    <label class="form-label" for="inp_region">Region <b class="text-danger">*</b></label> 
+                                    <span class="form-note">Specify the Region here.</span>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-8">
+
+                                <select class="form-select" name="inp_region" id="inp_region" onclick="get_province(this.value)">
+                                    <option value="" data-select2-id="3" style="text-transform: uppercase !important;">- SELECT REGION -</option>
+                                    </select>
+                                    
+                            </div>
+                        </div>
+
+
+                        <!-- Province --> 
+                        <div class="row mt-2 align-center">
+                            <div class="col-lg-4">
+
+                                <div class="form-group">
+                                    <label class="form-label" for="inp_province">Province <b class="text-danger">*</b></label> 
+                                    <span class="form-note">Specify the Province here.</span>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-8">
+
+                                <select class="form-select" name="inp_province" id="inp_province">
+                                    <option value="" data-select2-id="3" style="text-transform: uppercase !important;">- SELECT PROVINCE -</option>
+                                    </select>
+                                    
+                            </div>
+                        </div>
+
+
+                        <!-- CityMun --> 
+                        <div class="row mt-2 align-center">
+                            <div class="col-lg-4">
+
+                                <div class="form-group">
+                                    <label class="form-label" for="inp_citymun">City/Municipality <b class="text-danger">*</b></label> 
+                                    <span class="form-note">Specify the City/Municipality here.</span>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-8">
+
+                                <select class="form-select">
+                                    <option value="" data-select2-id="3" style="text-transform: uppercase !important;">- SELECT CITY/MUNICIPALITY -</option>
+                                    </select>
+                                    
+                            </div>
+                        </div>
+
+
+
+                        <!-- Barangay --> 
+                        <div class="row mt-2 align-center">
+                            <div class="col-lg-4">
+
+                                <div class="form-group">
+                                    <label class="form-label" for="inp_brgy">Barangay <b class="text-danger">*</b></label> 
+                                    <span class="form-note">Specify the Barangay here.</span>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-8">
+
+                                <select class="form-select">
+                                    <option value="" data-select2-id="3" style="text-transform: uppercase !important;">- SELECT BARANGAY -</option>
+                                    </select>
+                                    
+                            </div>
+                        </div>
+
+
+
+                        <!-- Postal Code -->
+                         <div class="row mt-2 align-center">
+                            <div class="col-lg-4">
+
+                                <div class="form-group">
+                                    <label class="form-label" for="inp_pc">Postal Code <b
+                                            class="text-danger">*</b></label>
+                                    <span class="form-note">Specify the Postal Code here.</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="form-control-wrap">
+                                    <div class="form-icon form-icon-right">
+                                        <em class="icon ni ni-info"></em>
+                                    </div>
+                                    <input type="text" required class="form-control" id="inp_pc" name="inp_pc"
+                                        placeholder="Enter (Required) Postal Code here..." required>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Submit Button --> 
+                         <div class="col-lg-5">
+                        </div>
+                        <div class="col-1g-7" style="float: right">
+                            <hr>
+                        </div>
+
+                        <div class="col-lg-5">
+                        </div>
+                        <div class="col-lg-7 justify-end" style="float: right">
+                            <hr>
+                            <div class="form-group mt-2 mb-2 justify-end">
+                                <button type="reset" class="btn btn-light bg-white mx-3"> 
+                                    <em class="icon ni ni-repeat"></em>&nbsp;
+                                        Reset
+                                </button>
+                                <button type="submit" class="btn btn-light bg-white">
+                                    <em class="icon ni ni-save"></em>&nbsp;
+                                    Submit Record
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
             </div>
-        </div>           
+        </div>
     </div>
-</div>
-</x-app-layout>                
+</x-app-layout>
